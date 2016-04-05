@@ -1,0 +1,131 @@
+@model ElmahDashboardHostingApp.Areas.MvcElmahDashboard.Models.Logs.ItemDetailsModel
+@using System.Configuration
+@{
+    Layout = null;
+    var dateFormat = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.Replace("yyyy", "yy").ToUpperInvariant();
+    var supportsUserAgentInfo = Model.UserAgentInfoProvider.ServiceUrl != null;
+    var supportsRemoteAddressInfo = Model.RemoteAddressInfoProvider.ServiceUrl != null;
+}
+
+<div class="form-inline pull-right visible-xs" style="position: fixed; right: 16px;">
+    <a class="btn btn-primary" href="history:back"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+    <button class="btn btn-primary nav-detail-next" data-relative-to="@(Model.Item.Sequence)"><span class="glyphicon glyphicon-triangle-left"></span></button>
+    <button class="btn btn-primary nav-detail-prev" data-relative-to="@(Model.Item.Sequence)"><span class="glyphicon glyphicon-triangle-right"></span></button>
+</div>
+<div class="form-inline pull-right hidden-xs" style="position: fixed; right: 16px;">
+    <a class="btn btn-primary" href="history:back"><span class="glyphicon glyphicon-menu-hamburger"></span> Back</a>
+    <button class="btn btn-primary nav-detail-next" data-relative-to="@(Model.Item.Sequence)"><span class="glyphicon glyphicon-triangle-left"></span> Newer</button>
+    <button class="btn btn-primary nav-detail-prev" data-relative-to="@(Model.Item.Sequence)">Older <span class="glyphicon glyphicon-triangle-right"></span></button>
+</div>
+
+<h2>Log Details <small>@(Model.Item.Sequence)</small></h2>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Item.ErrorId</td>
+    </tr>
+    <tr>
+        <th>Time (UTC)</th>
+        <td>
+            @Model.Item.TimeUtc.ToString("F") <span class="label label-primary">@Model.Item.TimeAgoText</span>
+        </td>
+    </tr>
+    <tr>
+        <th>Time&nbsp;(Browser)</th>
+        <td>
+            <span data-utctime="@(Model.Item.TimeUtc.Epoch())" data-format="@(dateFormat) hh:mm:ss">
+                @(Model.Item.TimeUtc.ToString()) (UTC)
+            </span>
+            <span class="label label-primary">@Model.Item.TimeAgoText</span>
+        </td>
+    </tr>
+    <tr>
+        <th>Application</th>
+        <td>@Model.Item.Application</td>
+    </tr>
+    <tr>
+        <th>Host</th>
+        <td>@Model.Item.Host</td>
+    </tr>
+    <tr>
+        <th>Source</th>
+        <td>@Model.Item.Source</td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td>@Model.Item.Type</td>
+    </tr>
+    <tr>
+        <th>Message</th>
+        <td>@Model.Item.Message</td>
+    </tr>
+    <tr>
+        <th>User</th>
+        <td>@Model.Item.User</td>
+    </tr>
+    <tr>
+        <th>StatusCode</th>
+        <td>@Model.Item.StatusCode</td>
+    </tr>
+    @if (Model.Item.ServerVariables != null && Model.Item.ServerVariables.ContainsKey("REQUEST_METHOD") && Model.Item.ServerVariables["REQUEST_METHOD"] == "GET" && Model.Item.ServerVariables.ContainsKey("HTTPS") && Model.Item.ServerVariables.ContainsKey("PATH_INFO") && Model.Item.ServerVariables.ContainsKey("SERVER_NAME"))
+    {
+        var url =
+            ((Model.Item.ServerVariables["HTTPS"] == "on") ? "https://" : "http://")
+            + Model.Item.ServerVariables["SERVER_NAME"]
+            + ((Model.Item.ServerVariables["SERVER_PORT"] == "80") ? "" : ":" + Model.Item.ServerVariables["SERVER_PORT"])
+            + Model.Item.ServerVariables["SCRIPT_NAME"]
+            + ((Model.Item.ServerVariables.ContainsKey("QUERY_STRING") && Model.Item.ServerVariables["QUERY_STRING"] != "") ? "?" + Model.Item.ServerVariables["QUERY_STRING"] : "");
+        <tr>
+            <th>URL</th>
+            <td><a href="@(url)" target="errorurl">@(url)</a></td>
+        </tr>
+    }
+</table>
+
+<pre>@Model.Item.ErrorDetail</pre>
+
+@if (Model.Item.FormFields.Count > 0)
+{
+    <h3>Form Fields</h3>
+    <table class="table">
+        @foreach (var item in Model.Item.FormFields.OrderBy(i => i.Key))
+        {
+            <tr><th valign="top">@item.Key</th><td>@item.Value</td></tr>
+        }
+    </table>
+}
+
+@if (Model.Item.Cookies.Count > 0)
+{
+    <h3>Cookies</h3>
+    <table class="table">
+        @foreach (var item in Model.Item.Cookies.OrderBy(i => i.Key))
+        {
+            <tr><th valign="top">@item.Key</th><td>@item.Value</td></tr>
+        }
+    </table>
+}
+
+<h3>Server Variables</h3>
+<table class="table">
+    @foreach (var item in Model.Item.ServerVariables.OrderBy(i => i.Key))
+    {
+        <tr>
+            <th valign="top">@item.Key</th>
+            <td>
+                @if (item.Key == "HTTP_USER_AGENT" && supportsUserAgentInfo)
+                {
+                    <button type="button" class="btn btn-info btn-xs userAgentCmd"><span class="glyphicon glyphicon-info-sign"></span></button><span>&nbsp; </span>
+                }
+                else if (item.Key == "REMOTE_ADDR" && supportsRemoteAddressInfo)
+                {
+                    <button type="button" class="btn btn-info btn-xs remoteAddrCmd" data-latitude-property="@(Model.RemoteAddressInfoProvider.Latitude)" data-longitude-property="@(Model.RemoteAddressInfoProvider.Longitude)"><span class="glyphicon glyphicon-map-marker"></span></button><span>&nbsp; </span>
+                }
+                <span id="@item.Key">@item.Value</span>
+            </td>
+        </tr>
+    }
+</table>
+
+<a class="btn btn-default" href="@Url.Action("AllXml", new { id = Model.Item.ErrorId })" target="_blank"> XML Source </a>

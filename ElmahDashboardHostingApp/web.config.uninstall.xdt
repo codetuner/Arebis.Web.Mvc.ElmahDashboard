@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="MvcElmahDashboardConnectionName" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardCulture" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardLogCount" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardHeartBeatUrl" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardHeartBeatInterval" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardHeartBeatDirectFromBrowser" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardUserAgentInfoProvider" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+    <add key="MvcElmahDashboardRemoteAddressInfoProvider" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+  </appSettings>
+</configuration>

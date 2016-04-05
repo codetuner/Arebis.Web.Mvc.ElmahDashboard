@@ -1,0 +1,29 @@
+@model ElmahDashboardHostingApp.Areas.MvcElmahDashboard.Models.Logs.ItemsModel
+@{
+    Layout = null;
+    var dateFormat = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.Replace("yyyy", "yy").ToUpperInvariant();
+}
+
+@foreach (var item in Model.Items)
+{
+    <a id="i@(item.Sequence)" class="hidden" href="@(Url.Action("Details", new { id = item.ErrorId }))" data-href="@(Url.Action("Details", new { id = item.ErrorId }))?application={application}&host={host}&source={source}&type={type}&search={search}">@(item.Sequence)</a>
+    <tr data-forward-click="A#i@(item.Sequence)" style="cursor: pointer;">
+        <td>
+            @(item.Sequence)
+            <br /><small class="text-muted">@(item.RowNum)</small>
+        </td>
+        <td>
+            <span data-utctime="@(item.TimeUtc.Epoch())" data-format="@(dateFormat) hh:mm:ss">
+                @(item.TimeUtc.ToString()) (UTC)
+            </span>
+            <br />
+            <span class="floating-above"><small class="text-muted">@(item.TimeAgoText)</small></span>
+            <br />
+        </td>
+        <td>@item.Application</td>
+        <td>@item.Host</td>
+        <td>@item.Source</td>
+        <td>@item.Type</td>
+        <td>@item.Message</td>
+    </tr>
+}

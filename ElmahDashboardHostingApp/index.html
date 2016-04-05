@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MVC ELMAH Dashboard</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <style>
+        html {
+           -ms-overflow-style: scrollbar;
+        }
+        body {
+            margin-top: 32px;
+            font-size: 200%;
+        }
+        @media (max-width: 767px) {
+            body {
+                font-size: 100%;
+            }
+        }
+        .header-section {
+            margin-top: 40px;
+            margin-left: 60px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 7vw;
+            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+            margin-top: 60px;  
+            margin-bottom: 40px;
+        }
+        .tagline {
+            background-color: #A0A0FF;
+            color: white;
+            padding: 4px 12px 4px 12px; /* top right bottom left */
+            margin: 0px;
+            text-shadow: none;
+            font-size: 5vw;
+        }
+        .thumbnail {
+            border: 0px;
+        }
+        .bg-img-1 {
+            background-image: url(img/mvced1low.jpg);
+            background-size: cover;
+            background-position: 0px, 50px;
+            min-height: 680px; 
+            border-bottom: solid 1px #c0c0c0;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-size: 120%;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        .navbar {
+            font-size: 200%;
+        }
+        ul {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+        }
+        li {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .btn-info {
+            background-color: rgb(73, 175, 205);
+            background-image: linear-gradient(rgb(91, 192, 222), rgb(47, 150, 180));
+        }
+
+            .btn-info:hover {
+            background-color: rgb(53, 145, 165);
+            background-image: linear-gradient(rgb(61, 152, 182), rgb(32, 120, 145));
+            }
+
+        .btn-success {
+            background-color: rgb(81, 163, 81);
+            background-image: linear-gradient(rgb(98, 196, 98), rgb(81, 163, 81));
+            box-shadow: inset 0px 1px 0px rgba(255,255,255,0.2), 0px 1px 2px rgba(0,0,0,0.05);
+            text-shadow: 0px -1px 0px rgba(0,0,0,0.25);
+        }
+
+            .btn-success:hover {
+            background-color: rgb(61, 133, 61);
+            background-image: linear-gradient(rgb(73, 161, 73), rgb(61, 133, 61));
+            }
+
+        @media (max-width: 1799px) {
+            .bg-img-1 {
+                min-height: 600px; 
+            }
+        }
+        @media (max-width: 991px) {
+            .bg-img-1 {
+                min-height: 400px; 
+            }
+        }
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 36pt;
+            }
+            .tagline {
+                font-size: 24pt;
+            }
+            .bg-img-1 {
+                background-position: 10px, 80px;
+                min-height: 200px; 
+            }
+            .header-section {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 559px) {
+            .header-section {
+                margin-left: 20px;
+            }
+            .tagline-section {
+                display: none;
+            }
+        }
+
+        ol.ol-bullets {
+            margin-left: 0;
+            padding-right: 0;
+            list-style-type: none;
+        }
+
+        ol.ol-bullets li {
+            counter-increment: step-counter;
+            margin-bottom: 12px;
+        }
+
+        ol.ol-bullets li::before {
+            margin-left: -30px;
+            content: counter(step-counter);
+            margin-right: 20px;
+            font-size: 120%;
+            background-color: #8080C0;
+            color: white;
+            font-weight: bold;
+            padding: 3px 12px;
+            border-radius: 24px;
+        }
+}
+
+
+
+
+    </style>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body data-spy="scroll" data-target="#main-navbar" data-offset="32">
+
+    <nav id="main-navbar" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<span class="navbar-brand">
+                    <span class="glyphicon glyphicon-dashboard"></span>&nbsp; ELMAH Dashboard
+                </span>-->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#intro">Intro</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#install">Install</a></li>
+                </ul>
+                <a href="https://www.nuget.org/packages/Arebis.Web.Mvc.ElmahDashboard/" class="btn btn-success pull-right hidden-xs" style="font-size: 76%; margin-top: 2px;">Get NuGet!</a>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div>
+
+        <div id="intro" style="padding-top: 26px;">
+
+            <div class="container-fluid bg-img-1 section-start" style="">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header-section">
+                            <h1>ELMAH Dashboard</h1>
+                            <div class="tagline-section">
+                                <span class="tagline">Great insight in your</span><br />
+                                <span class="tagline">ELMAH Loggings</span>
+                            </div>
+                            <!--<div style="margin-top: 20px;">
+                            <a class="btn btn-info btn-lg" href="#">Learn more</a>
+                            <a class="btn btn-success btn-lg" href="#">Get ELMAH Dashboard</a>
+                        </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div style="background-color: #c0c0c0; padding-top: 24px; padding-bottom: 24px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" style="background-color: red;">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-6" style="background-color: blue;">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+            <div class="container" style="padding-top: 48px; padding-bottom: 48px; ">
+                <div class="row visible-xs col-xs-12">
+                    <p style="font-size: 200%; font-weight: bold; text-align: center;">
+                        An ASP.NET MVC Dashboard component for your ELMAH Logging.
+                        <br />
+                        <br />
+                        Delivered as a NuGet containing the source code of the MVC 'Area'.
+                        <br />
+                        <br />
+                        Provides log viewing and searching, auto-refresh monitoring, site availability check, geolocalization of
+                        users, etc.
+                    </p>
+                </div>
+                <div class="row hidden-xs" style="xborder: solid 1px;">
+                    <div class="col-sm-6">
+                        <p style="font-size: 120%; font-weight: bold;">
+                            An ASP.NET MVC Dashboard component for your ELMAH Logging.
+                            <br />
+                            <br />
+                            Delivered as a NuGet containing the source code of the MVC 'Area'.
+                            <br />
+                            <br />
+                            Provides log viewing and searching, auto-refresh monitoring, site availability check, geolocalization of
+                            users, etc.
+                        </p>
+                    </div>
+                    <div class="col-sm-6" style="background: url(img/BigScreen.png) no-repeat top right; background-size: contain; ">
+                        <img src="img/_transparent1x1.gif" width="80%" height="40%" style="xborder: solid 1px red;" />
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div id="features" style="padding-top: 60px;">
+
+            <div class="container-fluid" style="background-color: #c0c0c0;">
+                <div class="row" style="font-size: 2vw;">
+                    <div class="col-xs-4" style="text-align:center; background: url(img/MobilePhone2.png) no-repeat right; background-size: contain; padding: 20px; margin-right: 00px;">
+                        <img src="img/_transparent1x1.gif" width="100%" height="100%" />
+                    </div>
+                    <div class="col-xs-4" style="text-align:center; background-color: #c0c0c0; padding: 20px;">
+                        <div class="text-center" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
+                            <p style="padding-top: 5%; font-size: 200%; font-family: Montserrat, sans-serif; font-weight: bold;">Mobile Friendly</p>
+                            <ul>
+                                <li>Responsive design</li>
+                                <li>Bootstrap based</li>
+                            </ul>
+                            <div class="hidden-xs">
+                                <p>&nbsp;</p>
+                                <p style="color: white; text-shadow: -1px -1px 0 #808080, 1px -1px 0 #808080, -1px 1px 0 #808080, 1px 1px 0 #808080;">
+                                    <i>"Check your site is operational,<br />anywhere, anytime."</i>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-4" style="text-align:center; background: url(img/mvced2b.png) no-repeat right; background-size: cover; padding: 20px; margin-left: 00px;">
+                        <img src="img/_transparent1x1.gif" width="100%" height="100%" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="background-color: white; padding-top: 48px; padding-bottom: 48px; font-size: 18pt;">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <span class="thumbnail">
+                                <img src="img/featA.png" />
+                                Auto-refreshing dashboard to stay in touch with your applications behavior.
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="thumbnail">
+                                <img src="img/featB.png" />
+                                Time reported in your browsers local time with clear 'time ago' indicators.
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="thumbnail">
+                                <img src="img/featC.png" />
+                                Graphs show hourly or daily application behavior.
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="thumbnail">
+                                <img src="img/featE.png" />
+                                Check your site's actually up &amp; running&nbsp;!
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid" style="background-color: #c0c0c0;">
+                <div class="row" style="font-size: 2vw;">
+                    <div class="col-xs-4" style="text-align:center; background: url(img/mvced3b.png) no-repeat right; background-size: cover; padding: 20px; margin-left: 00px;">
+                        <img src="img/_transparent1x1.gif" width="100%" height="100%" />
+                    </div>
+                    <div class="col-xs-4" style="text-align:center; background-color: #c0c0c0; padding: 20px;">
+                        <div class="text-center" style="text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">
+                            <p style="padding-top: 5%; font-size: 140%; font-family: Montserrat, sans-serif; font-weight: bold;">Extended logging information</p>
+                            <ul style="font-size: 85%" class="hidden-xs">
+                                <li>Free text search</li>
+                                <li>Filtering per application, type, source, host, free text</li>
+                                <li>UTC, local time and time ago reporting</li>
+                                <li>User Agent information</li>
+                                <li>Geolocalization of users IP address</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-4" style="text-align:center; background: url(img/Tablet2.png) no-repeat right; background-size: contain; padding: 20px; margin-right: 00px;">
+                        <img src="img/_transparent1x1.gif" width="100%" height="100%" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="install" style="padding-top: 64px;">
+
+            <div></div>
+            <div class="section-start" style="background-color: #ffffff; margin: 32px; padding: 48px 32px; font-size: 12pt; border: dashed 12px #c0c0c0;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-size: 48px; font-family: Montserrat, sans-serif; font-weight: bold;">Setup Instructions</p>
+
+                            <div style="font-size: 140%">
+                                <p>
+                                    Make sure you have your <a href="http://www.andyfrench.info/2014/07/configuring-elmah-to-use-sql-server.html" target="_blank">ELMAH logging stored in a SQL Server database</a>.
+                                    This is a prerequisite for the MvcElmahDashboard.
+                                </p>
+                                <p style="margin-top: 30px;">
+                                    You are now ready to install:
+                                </p>
+                                <ol class="ol-bullets" style="margin: 30px 0px;">
+                                    <li>Create a new ASP.NET MVC Application in Visual Studio.NET.</li>
+                                    <li>Install the NuGet package "<i>Arebis.Web.Mvc.ElmahDashboard</i>".</li>
+                                    <li>Configure your Dashboard by setting the AppSettings.</li>
+                                </ol>
+                                <p>
+                                    Check the <a href="MvcElmahDashboard_Readme.html" target="_blank">MvcElmahDashboard Readme</a> for more details on setup and configuration.
+                                </p>
+                            </div>
+
+                            <img src="img/BigScreenLog.png" width="100%" height="100%" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="" style="background-color: #333333; color: #555555;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    &copy; Copyright 2015 Arebis.be
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

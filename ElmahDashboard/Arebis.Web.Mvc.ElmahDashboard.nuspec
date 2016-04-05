@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arebis.Web.Mvc.ElmahDashboard</id>
+    <version>1.0.0</version>
+    <title>ASP.NET MVC ELMAH Dashboard</title>
+    <authors>codetuner</authors>
+    <summary>An ASP.NET MVC dashboard and logviewer for your ELMAH loggings.</summary>
+    <description>An ASP.NET MVC C# area that provides a dashboard and logviewer to ELMAH loggings on SQL Server. This package contains only sourcecode, no assemblies nor dependencies.</description>
+    <tags>elmah mvc error logging dashboard</tags>
+    <licenseUrl>http://www.arebis.be/MvcElmahDashboard/license.html</licenseUrl>
+    <projectUrl>http://www.arebis.be/MvcElmahDashboard/</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <copyright>Copyright 2015 Rudi Breedenraedt</copyright>
+  </metadata>
+</package>

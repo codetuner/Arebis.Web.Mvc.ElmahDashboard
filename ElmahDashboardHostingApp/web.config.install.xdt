@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="MvcElmahDashboardConnectionName" value="________________________ (Connection name to Elmah SQL Server DB here)" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardCulture" value="" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardLogCount" value="3" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardHeartBeatUrl" value="" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardHeartBeatInterval" value="00:01:00" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardHeartBeatDirectFromBrowser" value="false" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardUserAgentInfoProvider" value="Caption=User Agent String.Com;InfoUrl=http://www.useragentstring.com/;ServiceUrl=http://www.useragentstring.com/?uas={value}&amp;getJSON=all" xdt:Transform="Insert" />
+    <add key="MvcElmahDashboardRemoteAddressInfoProvider" value="Caption=FreeGeoIP.net;InfoUrl=http://freegeoip.net/;ServiceUrl=https://freegeoip.net/json/{value};Latitude=latitude;Longitude=longitude" xdt:Transform="Insert" />
+  </appSettings>
+</configuration>
