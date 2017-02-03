@@ -29,6 +29,32 @@ $(function () {
         });
     });
 
+    
+ $("BODY").on('click', '.btn-danger', function () {
+        var sequence = $(this).data("relative-to");
+        $(".loader").addClass("loading");
+        $.ajax({
+            cache: false,
+            url: '@(Url.Action("Delete"))?sequence=' + sequence + ((window.location.search == '') ? '' : '&' + window.location.search.substr(1))
+            })
+            .always(function () {
+            $(".loader").removeClass("loading");
+            })
+            .done(function (data, textStatus, jqXHR) {
+            $("#details-content").html(data);
+            $("#details-content").loaded();
+            alert('Item deleted.');
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+            if (jqXHR.status == 404) {
+            alert('No item found.');
+            } else {
+            alert('Failed to delete item.\r\nPlease retry.');
+            }
+            });
+            });
+
+    
     $("BODY").on('click', '.nav-detail-prev', function () {
         var sequence = $(this).data("relative-to");
         $(".loader").addClass("loading");
