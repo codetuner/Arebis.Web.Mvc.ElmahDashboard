@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Arebis.Web.Mvc.ElmahDashboard</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>ASP.NET MVC ELMAH Dashboard</title>
     <authors>codetuner</authors>
     <summary>An ASP.NET MVC dashboard and logviewer for your ELMAH loggings.</summary>
