@@ -99,7 +99,14 @@ $(function () {
             $("#remoteaddr-dlg .modal-body .data TABLE").html(toTable(data));
             $('#remoteaddr-dlg .modal-body .data').removeClass('hidden');
             // https://developers.google.com/maps/documentation/javascript/examples/marker-simple
-            var gloc = new google.maps.LatLng(data[latProperty], data[lngProperty]);
+            var gloc;
+            if (latProperty == lngProperty) {
+                // There is a single property of lat and long, assume it is a string in "lat,long" format (as for ipinfo.io):
+                gloc = new google.maps.LatLng(data[latProperty].split(',')[0], data[latProperty].split(',')[1]);
+            } else {
+                // There are two different properties for lat and long:
+                gloc = new google.maps.LatLng(data[latProperty], data[lngProperty]);
+            }
             var gmap = new google.maps.Map(document.getElementById('google-map'), { zoom: 6, center: gloc });
             var gmark = new google.maps.Marker({ position: gloc, map: gmap, title: value, animation: 'DROP' /* placing animation: 'DROP' solves the problem of big blue box behind marker :) */ });
         })
