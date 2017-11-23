@@ -4,6 +4,8 @@
     var dateFormat = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.Replace("yyyy", "yy").ToUpperInvariant();
 }
 
+@* Disable Email obfuscation by Cloudflare (which is not compatible with this rendering) *@
+<!--email_off-->
 @foreach (var item in Model.Items)
 {
     <a id="i@(item.Sequence)" class="hidden" href="@(Url.Action("Details", new { id = item.ErrorId }))" data-href="@(Url.Action("Details", new { id = item.ErrorId }))?application={application}&host={host}&source={source}&type={type}&search={search}">@(item.Sequence)</a>
@@ -27,3 +29,4 @@
         <td>@item.Message</td>
     </tr>
 }
+<!--/email_off-->
