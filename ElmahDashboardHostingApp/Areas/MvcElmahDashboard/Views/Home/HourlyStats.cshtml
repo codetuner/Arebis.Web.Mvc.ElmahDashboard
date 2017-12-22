@@ -84,8 +84,9 @@
         <tbody>
             @foreach (var pair in Model.AppHourlyCounters.OrderBy(p => p.Key))
             {
+                var str = (String.IsNullOrEmpty(pair.Key) ? "Unknown" : pair.Key);
                 <tr>
-                    <th width="99%">@Html.ActionLink(pair.Key, "Index", new { controller = "Logs", application = pair.Key })</th>
+                    <th width="99%">@Html.ActionLink(str, "Index", new { controller = "Logs", application = pair.Key })</th>
                     @for (int i = 0; i < pair.Value.Length; i++)
                     {
                         <td class="hourvalue@(i)">@(pair.Value[i])</td>
