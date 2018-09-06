@@ -205,6 +205,15 @@ namespace ElmahDashboardHostingApp.Areas.MvcElmahDashboard.Code
             }
         }
 
+       public bool Delete(int id)
+        {
+            var sql = "DELETE FROM [{ElmahSchema}].[ELMAH_Error] where Sequence=" + id.ToString();
+            using (var cmd = this.CreateCommand(sql))
+            {
+                return (cmd.ExecuteNonQuery() == 1);
+            }
+        }
+
         protected IDbCommand CreateCommand(string sql, object[] parameters = null)
         {
             var cmd = this.Connection.CreateCommand();
