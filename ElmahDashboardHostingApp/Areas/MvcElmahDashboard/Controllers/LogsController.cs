@@ -80,6 +80,26 @@ namespace ElmahDashboardHostingApp.Areas.MvcElmahDashboard.Controllers
             return View(model);
         }
 
+
+        public ActionResult Delete(PrevNextRequest input)
+        {
+            using (var context = new ElmahDashboardContext())
+            {
+                var id = input.Sequence;
+                if (context.Delete(id))
+                {
+                    //return View();
+                }
+                else
+                {
+                  
+                   // return View();
+                }
+
+                return null;
+            }
+        }
+        
         public ActionResult ItemDetails(Guid id)
         {
             using (var context = new ElmahDashboardContext())
